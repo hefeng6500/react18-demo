@@ -1,9 +1,7 @@
-import { createStore } from 'redux'
+import { configureStore } from "@reduxjs/toolkit"
 
-const store = createStore(reducer)
-
-function reducer(state = { value: 0 }, action) {
-  switch (action.type) {
+const reducer = (state = { value: 0 }, { type }) => {
+  switch (type) {
     case "incremented":
       return { value: state.value + 1 }
 
@@ -15,8 +13,14 @@ function reducer(state = { value: 0 }, action) {
   }
 }
 
+const store = configureStore({
+  reducer: {
+    
+  }
+})
+
 store.subscribe(() => {
-  console.log("接受到 stata 变化：", store.getState().value);
+  console.log(store.getState().value)
 })
 
 export default store
