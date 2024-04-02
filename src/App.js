@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import store from "./store/index"
+import store, { incremented, decremented } from "./store/index"
 
 function App() {
 
   const [value, setValue] = useState(store.getState().value);
 
   const handlerClickIncrement = () => {
-    store.dispatch({ type: 'incremented' })
+    store.dispatch(incremented())
   }
 
   const handlerClickDecrement = () => {
-    store.dispatch({ type: 'decremented' })
+    store.dispatch(decremented())
   }
 
   useEffect(() => {

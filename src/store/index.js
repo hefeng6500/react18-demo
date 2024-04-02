@@ -1,26 +1,28 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { createSlice, configureStore } from "@reduxjs/toolkit"
 
-const reducer = (state = { value: 0 }, { type }) => {
-  switch (type) {
-    case "incremented":
-      return { value: state.value + 1 }
-
-    case "decremented":
-      return { value: state.value - 1 }
-
-    default:
-      return state
+const counterSlice = createSlice({
+  name: "counter",
+  initialState: {
+    value: 0
+  },
+  reducers: {
+    incremented: state => {
+      state.value += 1
+    },
+    decremented: state => {
+      state.value -= 1
+    }
   }
-}
+})
 
 const store = configureStore({
-  reducer: {
-    
-  }
+  reducer: counterSlice.reducer
 })
 
 store.subscribe(() => {
   console.log(store.getState().value)
 })
+
+export const { incremented, decremented } = counterSlice.actions
 
 export default store
